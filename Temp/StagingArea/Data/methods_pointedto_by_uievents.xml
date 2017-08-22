@@ -1,0 +1,73 @@
+<linker>
+	<assembly fullname="Assembly-CSharp">
+		<type fullname="Inputcode">
+			<method name="codeinput"/>
+		</type>
+		<type fullname="botanmanager">
+			<method name="leftchange"/>
+			<method name="rightchange"/>
+			<method name="mannnakabutton"/>
+		</type>
+		<type fullname="Button1">
+			<method name="quitbutton"/>
+			<method name="pausebottun"/>
+			<method name="quitbutton"/>
+			<method name="Resumesuru"/>
+			<method name="restartgameover"/>
+			<method name="restartbutton"/>
+			<method name="restartbutton"/>
+			<method name="Resumesuru"/>
+			<method name="quitbutton"/>
+			<method name="restartbutton"/>
+			<method name="pausebottun"/>
+			<method name="quitbutton"/>
+			<method name="quitbutton"/>
+			<method name="restartgameover"/>
+			<method name="pausebottun"/>
+			<method name="Resumesuru"/>
+			<method name="restartbutton"/>
+			<method name="quitbutton"/>
+			<method name="quitbutton"/>
+			<method name="restartbutton"/>
+			<method name="pausebottun"/>
+			<method name="Resumesuru"/>
+			<method name="quitbutton"/>
+			<method name="Resumesuru"/>
+			<method name="restartbutton"/>
+			<method name="quitbutton"/>
+			<method name="quitbutton"/>
+			<method name="pausebottun"/>
+			<method name="Resumesuru"/>
+			<method name="quitbutton"/>
+			<method name="restartgameover"/>
+			<method name="pausebottun"/>
+			<method name="restartbutton"/>
+			<method name="quitbutton"/>
+			<method name="pausebottun"/>
+			<method name="restartbutton"/>
+			<method name="quitbutton"/>
+			<method name="quitbutton"/>
+			<method name="Resumesuru"/>
+		</type>
+		<type fullname="share">
+			<method name="OnTweet"/>
+			<method name="OnTweet"/>
+			<method name="OnTweet"/>
+			<method name="OnTweet"/>
+			<method name="OnTweet"/>
+			<method name="OnTweet"/>
+			<method name="OnTweet"/>
+		</type>
+		<type fullname="selectlevelautomatic">
+			<method name="normal"/>
+			<method name="hard"/>
+			<method name="easy"/>
+		</type>
+		<type fullname="MoveScene">
+			<method name="OnClick"/>
+			<method name="OnClick"/>
+			<method name="backToTitle"/>
+			<method name="OnClick"/>
+		</type>
+	</assembly>
+</linker>

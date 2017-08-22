@@ -28,5 +28,8 @@ public class MoveScene : UIBehaviour {
 	public void backToTitle(){
 		SceneManager.LoadScene ("Title");
 	}
+	public void moveToTutorial(){
+		SceneManager.LoadScene ("tutorial");
+	}
 
 }

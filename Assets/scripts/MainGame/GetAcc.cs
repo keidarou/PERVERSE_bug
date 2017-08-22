@@ -33,7 +33,10 @@ public class GetAcc : MonoBehaviour
 	{ 
 		if (Application.loadedLevelName == "tutorial") {
 			if (tutorialSystem.wantAcc != ret) {
-				return -1;
+				ret = -100;
+			} else {
+				//return tutorialSystem.wantAcc;
+				//Debug.Log ("おうせ");
 			}
 		}
 		return ret; 

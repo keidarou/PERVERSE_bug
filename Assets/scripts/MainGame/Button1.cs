@@ -18,8 +18,15 @@ public class Button1 : MonoBehaviour
     public bool automaticmode = true;
     movetheballautomatic script;
     timelimitandmemory timescript;
+
+	public AudioClip sound1;
+	public AudioClip sound2;
+	AudioSource audioSource;
+
     public void pausebottun()
     {
+		audioSource.clip = sound1;
+		audioSource.Play ();
         if (automaticmode)
         {
             timee = GameObject.Find("timecounter");
@@ -39,18 +46,24 @@ public class Button1 : MonoBehaviour
     }
     public void restartbutton()
     {
+		audioSource.clip = sound2;
+		audioSource.Play ();
         script.restartflag = true;
         script.pauseflag = false;
     }
     public void restartgameover()//オートマティックモードのときのみ
     {
-            timee = GameObject.Find("timecounter");
+		audioSource.clip = sound2;
+		audioSource.Play ();
+        timee = GameObject.Find("timecounter");
         script.clearflag = false;
         timescript = timee.GetComponent<timelimitandmemory>();
         timescript.pauseorquitflag = true;
     }
     public void quitbutton()
     {
+		audioSource.clip = sound2;
+		audioSource.Play ();
         if (automaticmode)
         {
             timee = GameObject.Find("timecounter");
@@ -60,6 +73,8 @@ public class Button1 : MonoBehaviour
     }
     public void Resumesuru()
     {
+		audioSource.clip = sound1;
+		audioSource.Play ();
         script.pauseflag = false;
     }
 
@@ -67,6 +82,7 @@ public class Button1 : MonoBehaviour
     void Start()
     {
         script = gameobj.GetComponent<movetheballautomatic>();
+		audioSource = this.GetComponent<AudioSource> ();
     }
 
     // Update is called once per frame

@@ -8,82 +8,127 @@ public class tutorialSystem : MonoBehaviour {
 	public GameObject me;
 	public GameObject text;
 	public GameObject text2;
-	public GameObject Acc;
+	public GameObject acc;
 	public GameObject touch;
 	public int step=0;
 	public int stepCount=0;	
 	public int touchInfo;
 	public int accInfo;
 
-	public static int wantAcc=-9;
+	public static int wantAcc=- 999;
 
 	// Use this for initialization
 	void Start () {
 		Config.ctrlCfg = false;
 	}
-	
+	//2    1     0    1    2
+	//うえ、みぎ、した、みぎ、うえ
 	// Update is called once per frame
 	void Update () {
 		touchInfo= touch.GetComponent<touch> ().GetTouch() ;
-		accInfo = Acc.GetComponent<GetAcc> ().getDirection() ;
+		accInfo = acc.GetComponent<GetAcc> ().getDirection() ;
 		switch (step) {
 		case 0:
-			if(stepCount==1)messege ("Let's Start Tutorial!", "");
-			if(stepCount==60)messege("Let's Start Tutorial!", "Tap the Screen");
-			if (touchInfo == -1 && stepCount>60) {
+			if(stepCount==1)messege ("チュートリアルをはじめます", "");
+			if(stepCount==60)messege("チュートリアルをはじめます", "画面をタップしてください");
+			if (touchInfo == -1 && stepCount>70) {
 				stepStep();
 			}
 			break;
 		case 1:
-			
 			if (stepCount == 1) {
-				messege ("がめんをかたむけてたまをうごかせるお", "");
-				wantAcc = 1;
+				messege ("画面をかたむけてキューブをうごかせます", "");
 			}
-			if (stepCount == 60) {
-				messege ("がめんをかたむけてたまをうごかせるお", "みぎにかたむけてみよう");
+			if (touchInfo == -1 && stepCount > 20) {
+				stepStep ();
 			}
-			if (accInfo == 1 && stepCount>60) {
-				stepStep();
-			}
-
 			break;
 		case 2:
-			wantAcc = 3;
-			if (stepCount == 1)
-				messege ("はいプロ。", "");
-			if (stepCount == 60)
-				messege ("次は左にかたむけてみよう", "");
-			if (accInfo == 3 && stepCount > 90) {
-				//clearCount = stepCount;
-				stepStep();
+			if (stepCount == 1) {
+				messege ("ゴールは赤い球です", "");
 			}
-			//if (stepCount - clearCount > 60) {
-			//	stepStep ();
-			//}
+			if (stepCount == 40) {
+				messege ("ゴールは赤い球です", "二つのキューブがゴールに着けばクリアです");
+			}
+			if (touchInfo == -1 && stepCount > 60) {
+				stepStep ();
+			}
 			break;
 		case 3:
-			wantAcc = 1;
-			if(stepCount==1)messege ("いいね", "");
-			if(stepCount==60)messege ("このままゴールまで運んでみよう！", "");
-			if(stepCount==120)messege ("このままゴールまで運んでみよう！", "右にかたむけてみよう");
-			if (accInfo == 1 && stepCount>150) {
+			if (stepCount == 1) {
+				messege ("画面を上にかたむけてみよう", "");
+				wantAcc = 2;
+			}
+			if (accInfo == wantAcc && stepCount>20) {
 				stepStep();
 			}
 			break;
 		case 4:
-			wantAcc = 2;
-			if(stepCount==1)messege ("そのちょうし！", "");
-			if(stepCount==60)messege ("つぎは上にかたむけてみよう！", "");
-			if (accInfo == 2 && stepCount>150) {
+			if (stepCount == 1) {
+				messege ("右にかたむけてみよう", "");
+				wantAcc = 1;
+			}
+			if (accInfo == wantAcc && stepCount>20) {
 				stepStep();
 			}
 			break;
 		case 5:
-			messege ("", "");
+			if (stepCount == 1) {
+				messege ("このように緑色のキューブは傾けた方向に、", "");
+			}
+			if (stepCount == 90) {
+				messege ("緑色のキューブは傾けた方向に、", "赤色のキューブはその逆の方向に動きます");
+			}
+			if (touchInfo == -1 && stepCount > 100) {
+				stepStep ();
+			}
+			break;
+		case 6:
+			if (stepCount == 1) {
+				messege ("それではゴールをめざしてみましょう", "");
+			}
+			if (touchInfo == -1 && stepCount > 20) {
+				stepStep ();
+			}
+			break;
+		case 7:
+			if (stepCount == 1) {
+				messege ("ゴールまでキューブをはこんでみよう", "");
+			}
+			if (stepCount == 40) {
+				messege ("ゴールまでキューブをはこんでみよう", "したにかたむけてみよう");
+				wantAcc = 0;
+			}
+			if (accInfo == wantAcc && stepCount>60) {
+				stepStep();
+			}
+			break;
+		case 8:
+			if (stepCount == 1) {
+				messege ("ゴールまでキューブをはこんでみよう", "");
+			}
+			if (stepCount == 40) {
+				messege ("ゴールまでキューブをはこんでみよう", "右にかたむけてみよう");
+				wantAcc = 1;
+			}
+			if (accInfo == wantAcc && stepCount>60) {
+				stepStep();
+			}
+			break;
+		case 9:
+			if (stepCount == 1) {
+				messege ("ゴールまでキューブをはこんでみよう", "");
+			}
+			if (stepCount == 40) {
+				messege ("ゴールまでキューブをはこんでみよう", "上にかたむけてみよう");
+				wantAcc = 2;
+			}
+			if (accInfo == wantAcc && stepCount > 60) {
+				stepStep ();
+			}
 			break;
 		default:
-			step = 0;
+			messege ("","");
 			break;
 		}
 		stepCount++;
