@@ -201,13 +201,14 @@ public class movetheballautomatic : MonoBehaviour
                     if (tomatteirutaimu > 0.6f) { houkoudetomatteiruka = true; tomatteirutaimu = 0; }
                 }
 				//if(tutorialSystem.wantAcc==acc.getDirection())Debug.Log(tutorialSystem.wantAcc==acc.getDirection());
-				if (Application.loadedLevelName == "tutorial") {
+				if (SceneManager.GetActiveScene().name == "tutorial") {
 					if (idouchuujanai == true && acc.getDirection () == tutorialSystem.wantAcc) {
 						Debug.Log (tutorialSystem.wantAcc);
-						Debug.Log ("ここきてうよっ！2");
-						//if (= acc.getDirection ()) {
-							first = false;
-							idouchuujanai = false;//移動中
+                        if (nowrotation != acc.getDirection())
+                        { 
+                            first = false;
+                        }
+                        idouchuujanai = false;//移動中
 							nowrotation = acc.getDirection ();//スマホの角度代入
 							selectDirectionandrange (nowrotation);//上向きに何マス、下向きに何マス移動するかをメモ
 							ballmove ();//動かす！
@@ -287,7 +288,7 @@ public class movetheballautomatic : MonoBehaviour
                 {
                     if (flaga)
                     {
-                        //flaga = false;Debug.Log("flaga");
+                        flaga = false;Debug.Log("flaga");
                         HandheldUtil.vibrate(5);
                     }
                 }
@@ -300,7 +301,7 @@ public class movetheballautomatic : MonoBehaviour
                 {
                     if (flagb)
                     {
-                        //flagb = false; Debug.Log("flagb");
+                        flagb = false; Debug.Log("flagb");
                         HandheldUtil.vibrate(5);
                     }
                     //  ballup.transform.position = upvectormokuteki;
