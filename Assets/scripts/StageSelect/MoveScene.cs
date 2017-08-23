@@ -9,20 +9,18 @@ using UnityEngine.SceneManagement;
 public class MoveScene : UIBehaviour {
 	public GameObject createBtn;
 
-	public int stgNum;//ここにCreateButton.csから番号があたえれられる
+	public int stgNum;//CreateButton.csから番号があたえれられる
 
-	// Use this for initialization
-	//protected override void Start () {
-
-		//base.Start ();
-
-		//GetComponent<Button> ().onClick.AddListener (OnClick);
-	//}
 	public void OnClick(){
-		Debug.Log ("de");
+		//Debug.Log ("de");
 		CreateButton.sendStageNum = stgNum;
-		SceneManager.LoadScene ("MainGame");
-
+		if (stgNum <= 5) {
+			SceneManager.LoadScene ("maineasy");
+		} else if (stgNum <= 10) {
+			SceneManager.LoadScene ("mainnormal");
+		}else if (stgNum<=15){
+			SceneManager.LoadScene ("mainhard");
+		}
 	}
 
 	public void backToTitle(){

@@ -69,7 +69,13 @@ public class Button1 : MonoBehaviour
             timee = GameObject.Find("timecounter");
             Destroy(timee);
         }
-        SceneManager.LoadScene("Title");
+		string sceneName = Application.loadedLevelName;
+		if (sceneName == "maineasy" || sceneName == "mainnormal" || sceneName == "mainhard") {
+			GameObject.Destroy(GameObject.Find("timecounter"));Debug.Log ("destroy");
+			SceneManager.LoadScene ("StageSelect");
+		} else {
+			SceneManager.LoadScene ("Title");
+		}
     }
     public void Resumesuru()
     {
@@ -88,7 +94,6 @@ public class Button1 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log(script.pauseflag);
         if (script.pauseflag == false)
         {
             restart.SetActive(false);

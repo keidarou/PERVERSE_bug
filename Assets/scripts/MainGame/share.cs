@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using System.Collections;
 
 public class share : MonoBehaviour
 {
@@ -15,7 +14,7 @@ public class share : MonoBehaviour
         Debug.Log("Sharing");
         Debug.Log(Application.persistentDataPath);
         // 画面をキャプチャ
-		//ScreenCapture.CaptureScreenshot("screenShot.png");
+		Application.CaptureScreenshot("screenShot.png");//iOS
 		//ScreenCapture.CaptureScreenshot("screenShot.png");
 
 

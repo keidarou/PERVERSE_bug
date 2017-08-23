@@ -4,9 +4,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class movetheballautomatic : MonoBehaviour
 {
-
-    //かえた！
-    //よく考えたら１８０度回転させたとき死ぬやんこれ
     //--------------------変数-------------------//
     public bool pauseflag = false;//パス中ならtrueにします
     public bool clearflag = false;//クリア時にtrueを代入してやってくださいクリア画面を立ち上げます<<<<<<<<<-----けいだろーーーーーーーーーーーーーーーーー！
@@ -35,11 +32,7 @@ public class movetheballautomatic : MonoBehaviour
     Vector3 startup, startdown;
     Vector3 upvectormokuteki, upvectornow, downvectornow, downvectormokuteki = Vector3.zero, directiondown, directionup;//移動にはvectorにする必要がある
                                                                                                                         //-------------------------------------------------
-                                                                                                                        //内容としては、玉が動き終わって、スマホの方向、位置が与えられたとき、どの方向に何マス動くかというのを返します。
-
-    //返すといっても変数の中に格納しておくだけです。返り値はないです。
-
-
+                                                                                                                        //内容としては、玉が動き終わって、スマホの方向、位置が与えられたとき、どの方向に何マス動くかというのを返します
     int Selectrange(int x, int y, int nowx, int nowy)//このx,yはx方向にどれだけ、y方向も同様なので、通常x,y=1,0・0,1・-1,0・0,-1
     {
         int count = 0;
@@ -102,8 +95,6 @@ public class movetheballautomatic : MonoBehaviour
 
     bool ballmove()//玉を動かすぞい
     {
-        //balldown.transform.position = balldown.transform.position;//ダウンボールの位置を代入
-        //ballup.transform.position = ballup.transform.position;//アップボールの位置を代入
         int movexhoukou = 0, moveyhoukou = 0;//下向きがどの方向に行くか、つまり、x=1,y=0で右方向に１進むみたいな
         if (nowrotation == 0) { movexhoukou = 0; moveyhoukou = -1; }//もし、下向きなら!
         if (nowrotation == 1) { movexhoukou = 1; moveyhoukou = 0; }//右!
@@ -114,8 +105,6 @@ public class movetheballautomatic : MonoBehaviour
         downvectormokuteki += new Vector3(movexhoukou * haba * down, moveyhoukou * haba * down, 0f);//目的なので、それに方向×距離を足す
                                                                                                     //     upvectormokuteki = ballup.transform.position;//同様
         upvectormokuteki -= new Vector3(movexhoukou * haba * up, moveyhoukou * haba * up, 0f);//同様
-
-        //  Debug.Log(movexhoukou);Debug.Log(moveyhoukou);
 
         upvectornow = ballup.transform.position;//今
         downvectornow = balldown.transform.position;//同じ
@@ -128,7 +117,6 @@ public class movetheballautomatic : MonoBehaviour
     {
         HandheldUtil.Initialize();
         slidebool = Config.ctrlCfg;
-        //  mapgenerator = GameObject.Find("mapgenerator");//mapgeneratorからmapの配列をひくため、ただ、これ呼ばれる順番が怪しい
         if (automaticmode)
         {
             map = mapgenerator.GetComponent<automaticgenerator>().map;//これ、こっちの方が速く実行されていたらしぬので、そこを注意
@@ -158,17 +146,6 @@ public class movetheballautomatic : MonoBehaviour
         {
             codevisualizer cv = mapgenerator.GetComponent<codevisualizer>();
         }
-
-        //フォントさくせい
-        /* Debug.Log("up");
-         Debug.Log(Selectrange(0, -1, nowdownx, nowdowny));
-         Debug.Log("down");
-         Debug.Log(Selectrange(0, 1, nowdownx, nowdowny));
-         Debug.Log("left");
-         Debug.Log(Selectrange(-1, 0, nowdownx, nowdowny));
-         Debug.Log("right");
-         Debug.Log(Selectrange(1, 0, nowdownx, nowdowny));*/
-
     }
     bool houkoudetomatteiruka = false;
 
