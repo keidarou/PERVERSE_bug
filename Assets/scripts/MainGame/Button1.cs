@@ -51,6 +51,27 @@ public class Button1 : MonoBehaviour
         script.restartflag = true;
         script.pauseflag = false;
     }
+    public void next()
+    {
+        if (CreateButton.sendStageNum != 0 && CreateButton.sendStageNum <15)
+        {
+            CreateButton.sendStageNum++;
+            int stgNum = CreateButton.sendStageNum;
+            Destroy(GameObject.Find("timecounter"));
+            if (stgNum <= 5)
+            {
+                SceneManager.LoadScene("maineasy");
+            }
+            else if (stgNum <= 10)
+            {
+                SceneManager.LoadScene("mainnormal");
+            }
+            else if (stgNum <= 15)
+            {
+                SceneManager.LoadScene("mainhard");
+            }
+        }
+    }
     public void restartgameover()//オートマティックモードのときのみ
     {
 		audioSource.clip = sound2;
@@ -69,10 +90,19 @@ public class Button1 : MonoBehaviour
             timee = GameObject.Find("timecounter");
             Destroy(timee);
         }
-		string sceneName = Application.loadedLevelName;
+		string sceneName = SceneManager.GetActiveScene().name;
 		if (sceneName == "maineasy" || sceneName == "mainnormal" || sceneName == "mainhard") {
-			GameObject.Destroy(GameObject.Find("timecounter"));Debug.Log ("destroy");
-			SceneManager.LoadScene ("StageSelect");
+            Debug.Log(CreateButton.sendStageNum);
+            if (CreateButton.sendStageNum <= 15)
+            {
+                GameObject.Destroy(GameObject.Find("timecounter")); Debug.Log("destroy");
+                SceneManager.LoadScene("StageSelect");
+            }
+            else
+            {
+                GameObject.Destroy(GameObject.Find("timecounter")); Debug.Log("destroy");
+                SceneManager.LoadScene("Title");
+            }
 		} else {
 			SceneManager.LoadScene ("Title");
 		}

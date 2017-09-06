@@ -67,6 +67,7 @@ public class codevisualizer : MonoBehaviour
     int[,] map = new int[50, 50];
     public int[,] Lockoff()
     {
+        strcode = MainStages.mapCode[CreateButton.sendStageNum];
         string level = strcode.Substring(0, 1);
         if (level == "1")
         {

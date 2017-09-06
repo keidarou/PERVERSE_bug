@@ -100,8 +100,6 @@ public class movetheballautomatic : MonoBehaviour
         if (nowrotation == 1) { movexhoukou = 1; moveyhoukou = 0; }//右!
         if (nowrotation == 2) { movexhoukou = 0; moveyhoukou = 1; }//上!!
         if (nowrotation == 3) { movexhoukou = -1; moveyhoukou = 0; }//左!!
-                                                                    // Debug.Log(up); Debug.Log(down);
-                                                                    //  downvectormokuteki = balldown.transform.position;//とりあえず初期化
         downvectormokuteki += new Vector3(movexhoukou * haba * down, moveyhoukou * haba * down, 0f);//目的なので、それに方向×距離を足す
                                                                                                     //     upvectormokuteki = ballup.transform.position;//同様
         upvectormokuteki -= new Vector3(movexhoukou * haba * up, moveyhoukou * haba * up, 0f);//同様
@@ -168,16 +166,12 @@ public class movetheballautomatic : MonoBehaviour
                 }
                 upvectornow = ballup.transform.position;
                 downvectornow = balldown.transform.position;
-                //ballup.transform.position = Vector3.Slerp(upvectornow, upvectormokuteki, Time.deltaTime);//Lerpですすむ、AnimationCurveであとで速さとか調節、第三引数ようわからないのでデバッグ
-                // balldown.transform.position = Vector3.Slerp(downvectornow, downvectormokuteki, Time.deltaTime);
-                //     Debug.Log(nowrotation);
                 
                 if (nowrotation != acc.getDirection() && !houkoudetomatteiruka && !slidebool)
                 {
                     tomatteirutaimu += Time.deltaTime;
                     if (tomatteirutaimu > 0.6f) { houkoudetomatteiruka = true; tomatteirutaimu = 0; }
                 }
-				//if(tutorialSystem.wantAcc==acc.getDirection())Debug.Log(tutorialSystem.wantAcc==acc.getDirection());
 				if (SceneManager.GetActiveScene().name == "tutorial") {
 					if (idouchuujanai == true && acc.getDirection () == tutorialSystem.wantAcc) {
 						Debug.Log (tutorialSystem.wantAcc);
@@ -202,6 +196,32 @@ public class movetheballautomatic : MonoBehaviour
 						ballmove ();//動かす！
 					}
 				}
+                if (Vector3.Distance(upvectormokuteki, upvectornow) >= kyoyouhanni)
+                {
+                    directionup = (upvectormokuteki - upvectornow).normalized;
+                    ballup.transform.Translate(directionup * Time.deltaTime * speed, Space.World);
+                }
+                else
+                {
+                    if (flaga)
+                    {
+                        flaga = false;Debug.Log("flaga");
+                        HandheldUtil.vibrate(5);
+                    }
+                }
+                if (Vector3.Distance(downvectormokuteki, downvectornow) >= kyoyouhanni)
+                {
+                    directiondown = (downvectormokuteki - downvectornow).normalized;
+                    balldown.transform.Translate(directiondown * Time.deltaTime * speed, Space.World);
+                }
+                else
+                {
+                    if (flagb)
+                    {
+                        flagb = false; Debug.Log("flagb");
+                        HandheldUtil.vibrate(5);
+                    }
+                }
                 if (Vector3.Distance(downvectormokuteki, downvectornow) <= kyoyouhanni && Vector3.Distance(upvectormokuteki, upvectornow) <= kyoyouhanni)//スピードを上げたら、この中の値を大きくしないとだめ！
                 {
                     if (!first)
@@ -235,6 +255,7 @@ public class movetheballautomatic : MonoBehaviour
                         {
                             GameObject clear = GameObject.Find("StageClear");
                             clear.GetComponent<StageClear>().clear();
+                            PlayerPrefs.SetInt(CreateButton.sendStageNum.ToString(), 1);
                         }
                     }
                     if (nowdownx == goalupx && nowdowny == goalupy && nowupx == goaldownx && nowupy == goaldowny)
@@ -252,38 +273,12 @@ public class movetheballautomatic : MonoBehaviour
                         {
                             GameObject clear = GameObject.Find("StageClear");
                             clear.GetComponent<StageClear>().clear();
+                            PlayerPrefs.SetInt(CreateButton.sendStageNum.ToString(), 1);
                         }
                     }
                 }
 
-                if (Vector3.Distance(upvectormokuteki, upvectornow) >= kyoyouhanni)
-                {
-                    directionup = (upvectormokuteki - upvectornow).normalized;
-                    ballup.transform.Translate(directionup * Time.deltaTime * speed, Space.World);
-                }
-                else
-                {
-                    if (flaga)
-                    {
-                        flaga = false;Debug.Log("flaga");
-                        HandheldUtil.vibrate(5);
-                    }
-                }
-                if (Vector3.Distance(downvectormokuteki, downvectornow) >= kyoyouhanni)
-                {
-                    directiondown = (downvectormokuteki - downvectornow).normalized;
-                    balldown.transform.Translate(directiondown * Time.deltaTime * speed, Space.World);
-                }
-                else
-                {
-                    if (flagb)
-                    {
-                        flagb = false; Debug.Log("flagb");
-                        HandheldUtil.vibrate(5);
-                    }
-                    //  ballup.transform.position = upvectormokuteki;
-                    // balldown.transform.position = downvectormokuteki;
-                }
+         
             }
             if (restartflag)
             {

@@ -114,30 +114,36 @@ public class timelimitandmemory : MonoBehaviour
         {
             string s = string.Format("{0}Seconds Left", 100 - (int)timer);
             string str = string.Format("Score : {0}", (int)clearcount);
-            GUI.Label(new Rect(Screen.width - 300, Screen.height - 50, 100, 30), str, labelStyle);
-            GUI.Label(new Rect(20, Screen.height - 50, 100, 30), s, labelStyle);
+            GUI.Label(new Rect(Screen.width - Screen.width/6.4f, Screen.height - Screen.height/21.6f, Screen.height/10.8f, Screen.height/36), str, labelStyle);
+            GUI.Label(new Rect(Screen.height/54, Screen.height - Screen.height/21.6f, Screen.height/10.8f, Screen.height/36), s, labelStyle);
             if (gameoverflag == true)
             {
                 int imamadenomax = PlayerPrefs.GetInt(scenename, 0);
                    Debug.Log(imamadenomax);
                 Debug.Log(clearcount);
+                bool flag = false;
                 if (imamadenomax < clearcount)//もしハイスコアなら
                 {
-                    GUI.Label(new Rect(Screen.width / 2 - 150, Screen.height / 2 - 160, 200, 30), "Highscore!!", Highscore);//表示されない
+                    GUI.Label(new Rect(Screen.width / 2 - Screen.height/7.2f, Screen.height / 2 - Screen.height/6.75f, Screen.height/5.4f, Screen.height/36), "Highscore!!", Highscore);//表示されない
                     string sscore = string.Format("Highscore : {0}    Your Score : {0}", (int)clearcount);
                     // Debug.Log(sscore);
-                    GUI.Label(new Rect(Screen.width / 2 - 400, Screen.height / 2 - 50, 100, 30), sscore, labelStyle);
+                    GUI.Label(new Rect(Screen.width / 2 - Screen.height/2.7f, Screen.height / 2 - Screen.height/21.6f, Screen.height/10.8f, Screen.height/36), sscore, labelStyle);
+                    flag = true;
+                    PlayerPrefs.SetInt(scenename, clearcount);
                 }
                 else
                 {
                     string sscore = string.Format("Highscore : {0}    Your Score : {1}", (int)imamadenomax, (int)clearcount);
-                    GUI.Label(new Rect(Screen.width / 2 - 400, Screen.height / 2 - 50, 100, 60), sscore, labelStyle);
+                    GUI.Label(new Rect(Screen.width / 2 - Screen.height/2.7f, Screen.height / 2 - Screen.height/21.6f, Screen.height/10.8f, Screen.height/36), sscore, labelStyle);
+                }
+                if (flag)
+                {
+                    GUI.Label(new Rect(Screen.width / 2 - Screen.height / 7.2f, Screen.height / 2 - Screen.height / 6.75f, Screen.height / 5.4f, Screen.height / 36), "Highscore!!", Highscore);//表示されない
                 }
                 script.gameoverflag = true;
                 if (pauseorquitflag)
                 {
                     SceneManager.LoadScene(scenename);
-                    PlayerPrefs.SetInt(scenename, clearcount);
                     timer = 0; clearcount = 0;
                     pauseorquitflag = false;
                     gameoverflag = false;
@@ -148,9 +154,9 @@ public class timelimitandmemory : MonoBehaviour
 
     public string tweetTextGenerate()
     {
-        string koubun = string.Format("I tooked {0}scores in {1}! Can you beat me?", clearcount, nannido);
+        string koubun = string.Format("I took {0}scores in {1}! Can you beat me?", clearcount, nannido);
         if (clearcount == 0) { return koubun; }
-        string mapcode = string.Format("\nThis is the map code!  【{0}】 ", code);
+        string mapcode = string.Format("\nThis is the map code!  【{0}】 #PERVERSEgame ", code);
         return koubun + mapcode;
     }
 }

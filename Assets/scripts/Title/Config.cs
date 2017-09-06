@@ -7,7 +7,7 @@ public class Config : MonoBehaviour {
 
 	public GameObject toggle;
 	public static bool ctrlCfg;
-
+    static bool hoge = true;
     public GameObject textfield;
     public GameObject toggleObj;
     public void animationend()
@@ -17,6 +17,7 @@ public class Config : MonoBehaviour {
     }
     // Use this for initialization
     void Start () {
+        if (hoge) { ctrlCfg = true;hoge = false; }
         toggle.GetComponent<Toggle>().isOn=ctrlCfg;
 	}
 	
